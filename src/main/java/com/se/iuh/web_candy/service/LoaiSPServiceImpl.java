@@ -38,4 +38,22 @@ public class LoaiSPServiceImpl implements LoaiSPService {
         return lsp;
     }
 
+	@Override
+	public List<LoaiSP> searchLoaiSanPhams(String theSearchName) {
+		// TODO Auto-generated method stub
+		return loaiSPRespository.findByTenLoaiSP(theSearchName);
+	}
+
+	@Override
+	public void saveLoaiSanPham(LoaiSP theLoaiSanPham) {
+		loaiSPRespository.save(theLoaiSanPham);
+		
+	}
+
+	@Override
+	public void deleteLoaiSanPham(int id) {
+		// TODO Auto-generated method stub
+		loaiSPRespository.deleteById(id);
+	}
+
 }

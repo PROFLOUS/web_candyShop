@@ -2,8 +2,13 @@ package com.se.iuh.web_candy.dao;
 
 import com.se.iuh.web_candy.entity.LoaiSP;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
-public interface LoaiSPRepository extends JpaRepository<LoaiSP, Integer> {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+public interface LoaiSPRepository extends JpaRepository<LoaiSP, Integer>,JpaSpecificationExecutor<LoaiSP> {
+	
+	public List<LoaiSP> findByTenLoaiSP(String tenLSP);
 
 }
