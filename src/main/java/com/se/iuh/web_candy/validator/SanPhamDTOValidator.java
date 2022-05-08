@@ -39,7 +39,7 @@ public class SanPhamDTOValidator implements Validator{
 		if (spDTO.getSoLuong() <= 0) {
 			errors.rejectValue("soLuong", null, "Số lượng không hợp lệ");
 		}
-		if (spDTO.getSoLuong() < 0) {
+		if (spDTO.getKhuyenMai() < 0) {
 			errors.rejectValue("khuyenMai", null, "Khuyến mãi không hợp lệ");
 		}
 	}
