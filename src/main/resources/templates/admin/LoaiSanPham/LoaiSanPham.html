@@ -123,8 +123,8 @@
 
 					<thead class="thead-light">
 						<tr>
-							<th style="width: 5%"></th>
-							<th style="width: 25%">Mã</th>
+							<th style="width: 2%"></th>
+							<th style="width: 25%">STT</th>
 							<th style="width: 50%">Tên loại sản phẩm</th>
 							<th style="width: 18%"></th>
 						</tr>
@@ -132,9 +132,9 @@
 
 					<tbody id="tableLoaiSanPham">
 
-							<tr th:each="tempLoaiProducts : ${listLoaiProduct}">
+							<tr th:each="tempLoaiProducts, state : ${listLoaiProduct}">
 								<td><span></span></td>
-								<td><span th:text="${tempLoaiProducts.maLoaiSP}"></span></td>
+								<td><span th:text="${state.count}"></span></td>
 								<td><span th:text="${tempLoaiProducts.tenLoaiSP}"></span></td>
 								
 								<td>

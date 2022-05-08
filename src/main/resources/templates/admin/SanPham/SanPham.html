@@ -63,7 +63,7 @@
         function loadData(data){
         	$("#tableSanPham").html("");
 			for (var i = 0; i < data.length; i++) {
-				$("#tableSanPham").append("<tr><td>"+data[i].maSP+"</td>"+
+				$("#tableSanPham").append("<tr><td>"+(i+1)+"</td>"+
 						"<td>"+data[i].tenSP+"</td>"+
 						"<td><img src='../"+data[i].hinhAnh+"' style='width:70px;height:70px;'/></td>"+
 						"<td>"+data[i].maLoaiSP.tenLoaiSP+"</td>"+
@@ -135,7 +135,7 @@
 					<thead class="thead-light">
 						<tr>
 
-							<th style="width: 5%">Mã</th>
+							<th style="width: 5%">STT</th>
 							<th style="width: 22%">Tên sản phẩm</th>
 							<th style="width: 12%">Hình ảnh</th>
 							<th style="width: 13%"><select class="form-control"
@@ -155,8 +155,8 @@
 
 					<tbody id="tableSanPham">
 
-							<tr th:each="tempProducts : ${listProduct}">
-								<td><span th:text="${tempProducts.maSP}"></span></td>
+							<tr th:each="tempProducts, state : ${listProduct}">
+								<td><span th:text="${state.count}"></span></td>
 								<td><span th:text="${tempProducts.tenSP}"></span></td>
 								<td><img th:src="@{'../'+${tempProducts.hinhAnh}}" style="width:70px;height:70px;"/></td>
 								

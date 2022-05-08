@@ -27,9 +27,18 @@ public class SanPhamDTOValidator implements Validator{
 		if (spDTO.getTenSP().trim().equals("")) {
 			errors.rejectValue("tenSP", null, "Tên sản phẩm không được bỏ trống");
 		}
-		if (spDTO.getHinhAnh().trim().equals("")) {
+		if (spDTO.getHinhAnh().getOriginalFilename().equals("")) {
 			errors.rejectValue("hinhAnh", null, "Ảnh sản phẩm không được bỏ trống");
 		}
+//		if (spDTO.getHinhAnh1().getOriginalFilename().equals("")) {
+//			errors.rejectValue("hinhAnh1", null, "Ảnh sản phẩm không được bỏ trống");
+//		}
+//		if (spDTO.getHinhAnh2().getOriginalFilename().equals("")) {
+//			errors.rejectValue("hinhAnh2", null, "Ảnh sản phẩm không được bỏ trống");
+//		}
+//		if (spDTO.getHinhAnh3().getOriginalFilename().equals("")) {
+//			errors.rejectValue("hinhAnh3", null, "Ảnh sản phẩm không được bỏ trống");
+//		}
 		if (spDTO.getThongTinSP().trim().equals("")) {
 			errors.rejectValue("thongTinSP", null, "Thông tin sản phẩm không được bỏ trống");
 		}

@@ -38,7 +38,7 @@
 			<div class="col-lg-6">
 				<h2 style="text-align: center;" id='formTitle'><span th:text="${formTitle}"></span></h2>
 				<form action="#" th:action="@{/admin/sanpham/save}"
-						 th:object="${sanpham}" method="POST">
+						 th:object="${sanpham}" method="POST" enctype="multipart/form-data">
 
 					<!-- Add hidden form field to handle update -->
 					<input type="hidden" th:field="*{maSP}" />
@@ -85,13 +85,49 @@
 
 						</div>
 
-
-
-					<div class="form-group">
-						<label>Hình ảnh:</label>
-						<input  type="text" th:field="*{hinhAnh}" class="form-control" />
-						<div class="alert alert-warning" th:if="${#fields.hasErrors('hinhAnh')}" th:errors="*{hinhAnh}"></div>
+					<div class="row">
+						<div class="col-lg-3">
+								<div class="form-group">
+									<label>Hình ảnh:</label>
+									<label for="imageUpload"
+										class="form-control btn btn-primary">Chọn ảnh</label> <input 
+										th:field="*{hinhAnh}" type="file" class="form-control" id="imageUpload" accept="image/*" style="display: none" />
+ 									<div class="alert alert-warning" th:if="${#fields.hasErrors('hinhAnh')}" th:errors="*{hinhAnh}"></div>
+								</div>
+						</div>
+						
+						<div class="col-lg-3">
+								<div class="form-group">
+									<label>Hình ảnh 1:</label>
+ 								<label for="imageUpload1"
+										class="form-control btn btn-primary">Chọn ảnh</label> <input 
+										th:field="*{hinhAnh1}" type="file" class="form-control" id="imageUpload1" accept="image/*" style="display: none" />
+ 									<div class="alert alert-warning" th:if="${#fields.hasErrors('hinhAnh1')}" th:errors="*{hinhAnh1}"></div>
+								</div>
+						</div>
+						
+						<div class="col-lg-3">
+								<div class="form-group">
+									<label>Hình ảnh 2:</label>
+ 								<label for="imageUpload2"
+										class="form-control btn btn-primary">Chọn ảnh</label> <input 
+										th:field="*{hinhAnh2}" type="file" class="form-control" id="imageUpload2" accept="image/*" style="display: none" />
+ 									<div class="alert alert-warning" th:if="${#fields.hasErrors('hinhAnh2')}" th:errors="*{hinhAnh2}"></div>
+								</div>
+						</div>
+						
+						<div class="col-lg-3">
+								<div class="form-group">
+									<label>Hình ảnh 3:</label>
+ 								<label for="imageUpload3"
+										class="form-control btn btn-primary">Chọn ảnh</label> <input 
+										th:field="*{hinhAnh3}" type="file" class="form-control" id="imageUpload3" accept="image/*" style="display: none" />
+ 									<div class="alert alert-warning" th:if="${#fields.hasErrors('hinhAnh3')}" th:errors="*{hinhAnh3}"></div>
+								</div>
+						</div>
 					</div>
+
+					
 					
 					<div class="form-group">
 						<label>Khuyến mãi:</label>

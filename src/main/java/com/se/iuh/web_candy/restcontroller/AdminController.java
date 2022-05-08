@@ -1,5 +1,8 @@
 package com.se.iuh.web_candy.restcontroller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.se.iuh.web_candy.dto.SanPhamDTO;
 import com.se.iuh.web_candy.entity.LoaiSP;
@@ -62,9 +65,14 @@ public class AdminController {
 	
 	@GetMapping("/sanpham/update")
 	public String showUpdateSP(Model model,@RequestParam("maSP") int id) {
-		SanPhamDTO theSP = new SanPhamDTO();
+		SanPham sp = sanPhamService.getSanPham(id);
+		MultipartFile hinhAnh= null;
+		MultipartFile hinhAnh1=null;
+		MultipartFile hinhAnh2=null;
+		MultipartFile hinhAnh3=null;
+		SanPhamDTO theSP = new SanPhamDTO(sp.getMaSP(),sp.getTenSP(),sp.getSoLuong(),sp.getDonGia(),hinhAnh,hinhAnh1,hinhAnh2,hinhAnh3,sp.getKhuyenMai(),sp.getThongTinSP(),sp.getMaLoaiSP().getMaLoaiSP());
 		model.addAttribute("loaiSP", loaiSPService.getLoaiSanPhams());
-		model.addAttribute("sanpham", sanPhamService.getSanPham(id));
+		model.addAttribute("sanpham", theSP);
 		model.addAttribute("formTitle", "Sửa sản phẩm");
 		model.addAttribute("formButton", "Cập nhật sản phẩm");
 		return "admin/sanpham/FormSanPham";
@@ -85,13 +93,12 @@ public class AdminController {
 		
 		LoaiSP loaiSP= loaiSPService.getLoaiSanPhamById(theSP.getMaLoaiSP());
 		if(theSP.getMaSP() == 0) {
-			sanPhamService.saveSanPham(new SanPham(0, theSP.getTenSP(), theSP.getSoLuong(), theSP.getDonGia(), theSP.getHinhAnh(), null, null, null, 0, theSP.getThongTinSP(), loaiSP ));
+			sanPhamService.saveSanPham(new SanPham(0, theSP.getTenSP(), theSP.getSoLuong(), theSP.getDonGia(), doUpload(theSP.getHinhAnh()), doUpload(theSP.getHinhAnh1()),doUpload(theSP.getHinhAnh2()), doUpload(theSP.getHinhAnh3()), 0, theSP.getThongTinSP(), loaiSP ));
 		}else {
 		
 		// save the sanpham
-		sanPhamService.saveSanPham(new SanPham(theSP.getMaSP(), theSP.getTenSP(), theSP.getSoLuong(), theSP.getDonGia(), theSP.getHinhAnh(), null, null, null, 0, theSP.getThongTinSP(), loaiSP ));
+		sanPhamService.saveSanPham(new SanPham(theSP.getMaSP(), theSP.getTenSP(), theSP.getSoLuong(), theSP.getDonGia(), doUpload(theSP.getHinhAnh()), doUpload(theSP.getHinhAnh1()),doUpload(theSP.getHinhAnh2()), doUpload(theSP.getHinhAnh3()), 0, theSP.getThongTinSP(), loaiSP ));
 		}
-		// use a redirect to prevent duplicate submissions
 		return "redirect:/admin/sanpham";
 	}
 	
@@ -170,5 +177,27 @@ public class AdminController {
 		
 		return "redirect:/admin/loaisanpham";
 	}
+	
+	
+	private String doUpload(MultipartFile hinhanh) {
+		
+			String name = hinhanh.getOriginalFilename();
+			String fileLocation = new File("src\\main\\resources\\static\\img\\shop").getAbsolutePath() + "\\" + name;
+			if (name != null && name.length() > 0) {
+				try {
+										
+					File serverFile = new File(fileLocation);
+
+					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+					stream.write(hinhanh.getBytes());
+					stream.close();
+					// 
+				} catch (Exception e) {
+				}
+			}
+			return "img/shop/"+name;
+		}
+
+	
 
 }
