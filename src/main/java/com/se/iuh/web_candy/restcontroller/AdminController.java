@@ -92,13 +92,10 @@ public class AdminController {
 		}
 		
 		LoaiSP loaiSP= loaiSPService.getLoaiSanPhamById(theSP.getMaLoaiSP());
-		if(theSP.getMaSP() == 0) {
-			sanPhamService.saveSanPham(new SanPham(0, theSP.getTenSP(), theSP.getSoLuong(), theSP.getDonGia(), doUpload(theSP.getHinhAnh()), doUpload(theSP.getHinhAnh1()),doUpload(theSP.getHinhAnh2()), doUpload(theSP.getHinhAnh3()), 0, theSP.getThongTinSP(), loaiSP ));
-		}else {
 		
 		// save the sanpham
-		sanPhamService.saveSanPham(new SanPham(theSP.getMaSP(), theSP.getTenSP(), theSP.getSoLuong(), theSP.getDonGia(), doUpload(theSP.getHinhAnh()), doUpload(theSP.getHinhAnh1()),doUpload(theSP.getHinhAnh2()), doUpload(theSP.getHinhAnh3()), 0, theSP.getThongTinSP(), loaiSP ));
-		}
+		sanPhamService.saveSanPham(new SanPham(theSP.getMaSP(), theSP.getTenSP(), theSP.getSoLuong(), theSP.getDonGia(), doUpload(theSP.getHinhAnh()), doUpload(theSP.getHinhAnh1()),doUpload(theSP.getHinhAnh2()), doUpload(theSP.getHinhAnh3()), theSP.getKhuyenMai(), theSP.getThongTinSP(), loaiSP ));
+		
 		return "redirect:/admin/sanpham";
 	}
 	
@@ -129,7 +126,6 @@ public class AdminController {
 	
 	@GetMapping("/loaisanpham/update")
 	public String showUpdateLoaiSP(Model model,@RequestParam("maLSP") int id) {
-		LoaiSP theLSP = new LoaiSP();
 		model.addAttribute("loaisanpham", loaiSPService.getLoaiSanPhamById(id));
 		model.addAttribute("formTitle", "Sửa loại sản phẩm");
 		model.addAttribute("formButton", "Cập nhật loại sản phẩm");
