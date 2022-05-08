@@ -1,4 +1,4 @@
-package com.se.iuh.web_candy.restcontroller;
+package com.se.iuh.web_candy.controller;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -48,7 +48,7 @@ public class AdminController {
 		return "admin/SanPham/SanPham";
 	}
 	
-	@GetMapping("/")
+	@GetMapping("")
 	public String homeAdmin() {
 		return "admin/homeAdmin";
 	}
@@ -84,10 +84,17 @@ public class AdminController {
 		sanPhamDTOValidator.validate(theSP, bindingResult);
 		
 		if (bindingResult.hasErrors()) {
+			if(theSP.getMaSP() == 0) {
+				model.addAttribute("loaiSP", loaiSPService.getLoaiSanPhams());
+				model.addAttribute("sanpham", theSP);
+				model.addAttribute("formTitle", "Thêm sản phẩm");
+				model.addAttribute("formButton", "Lưu sản phẩm");
+				return "admin/sanpham/FormSanPham";
+			}
 			model.addAttribute("loaiSP", loaiSPService.getLoaiSanPhams());
 			model.addAttribute("sanpham", theSP);
-			model.addAttribute("formTitle", "Thêm sản phẩm");
-			model.addAttribute("formButton", "Lưu sản phẩm");
+			model.addAttribute("formTitle", "Sửa sản phẩm");
+			model.addAttribute("formButton", "Cập nhật sản phẩm");
 			return "admin/sanpham/FormSanPham";
 		}
 		

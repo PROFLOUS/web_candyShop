@@ -1,4 +1,4 @@
-package com.se.iuh.web_candy.restcontroller;
+package com.se.iuh.web_candy.controller;
 
 import com.se.iuh.web_candy.entity.LoaiSP;
 import com.se.iuh.web_candy.service.LoaiSPService;
