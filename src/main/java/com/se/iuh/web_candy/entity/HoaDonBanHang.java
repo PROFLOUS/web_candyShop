@@ -57,7 +57,7 @@ public class HoaDonBanHang {
 	@Column(name="trang_thai")
 	private String trangThai;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "maHD", cascade = CascadeType.ALL)
 	private List<ChiTietHDBanHang> chiTietHoaDons;
 
 	

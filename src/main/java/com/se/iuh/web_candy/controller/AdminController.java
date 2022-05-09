@@ -19,11 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import com.se.iuh.web_candy.dto.SanPhamDTO;
+import com.se.iuh.web_candy.entity.HoaDonBanHang;
 import com.se.iuh.web_candy.entity.KhachHang;
 import com.se.iuh.web_candy.entity.LoaiSP;
 import com.se.iuh.web_candy.entity.Quyen;
 import com.se.iuh.web_candy.entity.SanPham;
 import com.se.iuh.web_candy.entity.TaiKhoan;
+import com.se.iuh.web_candy.service.HoaDonService;
 import com.se.iuh.web_candy.service.KhachHangService;
 import com.se.iuh.web_candy.service.LoaiSPService;
 import com.se.iuh.web_candy.service.QuyenService;
@@ -56,6 +58,9 @@ public class AdminController {
 	
 	@Autowired
 	private QuyenService quyenService;
+	
+	@Autowired
+	private HoaDonService hoaDonService;
 	
 	@GetMapping("/sanpham")
 	public String sanPham(Model model) {
@@ -271,6 +276,24 @@ public class AdminController {
 			return "img/shop/"+name;
 		}
 
-	
+	//hoa don
+		@GetMapping("/hoadon")
+		public ModelAndView hoaDon() {
+			ModelAndView mav = new ModelAndView("admin/HoaDon/HoaDon");
+			mav.addObject("listHoaDon", hoaDonService.getHoaDons());
+			return mav;
+		}
+		@GetMapping("/hoadon/update")
+		public ModelAndView showUpdateFormHD(@RequestParam int maHD) {
+			ModelAndView mav = new ModelAndView("admin/HoaDon/CapNhatHD");
+			HoaDonBanHang hd = hoaDonService.getHoaDon(maHD);
+			mav.addObject("listHoaDon", hd);
+			return mav;
+		}
+		@PostMapping("/hoadon/save")
+		public String saveHoaDon(@ModelAttribute HoaDonBanHang hoadon) {
+			hoaDonService.saveHoaDon(hoadon);
+			return "redirect:http://localhost:8080/admin/hoadon";
+		}
 
 }
