@@ -14,19 +14,19 @@ import javax.persistence.Table;
 @Table(name = "quyen")
 public class Quyen implements Serializable{
 	@Id
-	@OneToOne(cascade = CascadeType.ALL)
-	private TaiKhoan tenTaiKhoan;
+//	@OneToOne(cascade = CascadeType.ALL)
+	private String tenTaiKhoan;
 	
 	@Column(name="role")
 	private String role;
 
 	
 
-	public TaiKhoan getTenTaiKhoan() {
+	public String getTenTaiKhoan() {
 		return tenTaiKhoan;
 	}
 
-	public void setTenTaiKhoan(TaiKhoan tenTaiKhoan) {
+	public void setTenTaiKhoan(String tenTaiKhoan) {
 		this.tenTaiKhoan = tenTaiKhoan;
 	}
 
@@ -40,7 +40,7 @@ public class Quyen implements Serializable{
 
 	
 
-	public Quyen(TaiKhoan tenTaiKhoan, String role) {
+	public Quyen(String tenTaiKhoan, String role) {
 		super();
 		this.tenTaiKhoan = tenTaiKhoan;
 		this.role = role;
@@ -48,6 +48,8 @@ public class Quyen implements Serializable{
 
 	public Quyen() {
 		super();
+		this.tenTaiKhoan = null;
+		this.role = null;
 	}
 	
 	

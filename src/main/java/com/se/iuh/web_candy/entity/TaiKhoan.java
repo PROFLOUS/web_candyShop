@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,7 +20,7 @@ public class TaiKhoan {
 	private String matKhau;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name="MaKH")
+	@JoinColumn(name="ma_khach_hang")
 	private KhachHang khachHang;
 
 	public String getTenTK() {

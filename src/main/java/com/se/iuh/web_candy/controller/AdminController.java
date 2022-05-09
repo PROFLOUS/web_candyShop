@@ -15,12 +15,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
 
 import com.se.iuh.web_candy.dto.SanPhamDTO;
+import com.se.iuh.web_candy.entity.KhachHang;
 import com.se.iuh.web_candy.entity.LoaiSP;
+import com.se.iuh.web_candy.entity.Quyen;
 import com.se.iuh.web_candy.entity.SanPham;
+import com.se.iuh.web_candy.entity.TaiKhoan;
+import com.se.iuh.web_candy.service.KhachHangService;
 import com.se.iuh.web_candy.service.LoaiSPService;
+import com.se.iuh.web_candy.service.QuyenService;
 import com.se.iuh.web_candy.service.SanPhamService;
+import com.se.iuh.web_candy.service.TaiKhoanService;
 import com.se.iuh.web_candy.validator.LoaiSPValidator;
 import com.se.iuh.web_candy.validator.SanPhamDTOValidator;
 
@@ -39,6 +47,15 @@ public class AdminController {
 	
 	@Autowired
 	private LoaiSPValidator loaiSPValidator;
+	
+	@Autowired
+	private KhachHangService khachHangService;
+	
+	@Autowired
+	private TaiKhoanService taiKhoanService;
+	
+	@Autowired
+	private QuyenService quyenService;
 	
 	@GetMapping("/sanpham")
 	public String sanPham(Model model) {
@@ -179,6 +196,59 @@ public class AdminController {
 		}
 		
 		return "redirect:/admin/loaisanpham";
+	}
+	
+	
+	@GetMapping("/nguoidung")
+	public ModelAndView khachHang() {
+		ModelAndView mav = new ModelAndView("admin/NguoiDung/NguoiDung");
+		
+		mav.addObject("nguoidungs", khachHangService.getKhachHangs());
+		return mav;
+	}
+	@GetMapping("/nguoidung/taikhoan")
+	public ModelAndView taiKhoanNguoiDung(@RequestParam(value = "maKH") int id) {
+		KhachHang kh= khachHangService.getKhachHang(id);
+		ModelAndView mav = new ModelAndView("admin/NguoiDung/TaiKhoan");
+		TaiKhoan tk= taiKhoanService.searchTaiKhoanByKhachHangs(kh);
+		Quyen q= quyenService.getQuyenById(tk.getTenTK());
+		mav.addObject("taikhoan", q);
+		mav.addObject("kh", id);
+		return mav;
+	}
+
+	@GetMapping("/nguoidung/delete")
+	public String deleteNguoiDung(@RequestParam(value = "maKH") int id) {
+		KhachHang kh= khachHangService.getKhachHang(id);
+		TaiKhoan tk= taiKhoanService.searchTaiKhoanByKhachHangs(kh);
+		quyenService.deleteQuyen(tk.getTenTK());
+		taiKhoanService.deleteTaiKhoan(tk.getTenTK());
+//		khachHangService.deleteKhachHang(id);
+		return "redirect:http://localhost:8080/admin/nguoidung";
+	}
+	@GetMapping("/nguoidung/update")
+	public ModelAndView showUpdateForm(@RequestParam int maKH) {
+		ModelAndView mav = new ModelAndView("admin/NguoiDung/CapNhat");
+		KhachHang employee = khachHangService.getKhachHang(maKH);
+		mav.addObject("nguoidungs", employee);
+		return mav;
+	}
+	@PostMapping("/nguoidung/save")
+	public String saveNguoiDung(@ModelAttribute KhachHang khachhang) {
+		khachHangService.saveKhachHang(khachhang);
+		return "redirect:http://localhost:8080/admin/nguoidung";
+	}
+
+	@GetMapping("/nguoidung/timkiem")
+	public String searchBySdt(KhachHang theKhachHang, Model theModel, String keyword) {
+		if (keyword != "") {
+			List<KhachHang> list = khachHangService.searchKhachHangs(keyword);
+			theModel.addAttribute("nguoidungs", list);
+		} else {
+			List<KhachHang> list = khachHangService.getKhachHangs();
+			theModel.addAttribute("nguoidungs", list);
+		}
+		return "admin/NguoiDung/NguoiDung";
 	}
 	
 	

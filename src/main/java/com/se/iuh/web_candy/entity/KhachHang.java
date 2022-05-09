@@ -34,7 +34,7 @@ public class KhachHang {
     private String diaChi;
 	
 	@Column(name="email")
-    private int email;
+    private String email;
 	
 
 	@OneToMany(mappedBy = "khachHang", fetch = FetchType.LAZY)
@@ -72,11 +72,11 @@ public class KhachHang {
 		this.diaChi = diaChi;
 	}
 
-	public int getEmail() {
+	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(int email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 	
@@ -89,7 +89,7 @@ public class KhachHang {
 		this.hoaDons = hoaDons;
 	}
 
-	public KhachHang(int maKH, String tenKH, String sdt, String diaChi, int email) {
+	public KhachHang(int maKH, String tenKH, String sdt, String diaChi, String email) {
 		super();
 		this.maKH = maKH;
 		this.tenKH = tenKH;
