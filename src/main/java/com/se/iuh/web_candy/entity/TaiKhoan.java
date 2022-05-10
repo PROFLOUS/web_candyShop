@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tai_khoan")
-public class TaiKhoan {
+public class TaiKhoan{
 	
 	@Id
     @Column(name = "ten_tai_khoan")
@@ -18,6 +18,8 @@ public class TaiKhoan {
 	
 	@Column(name="mat_khau")
 	private String matKhau;
+	@Column(name = "role")
+	private String role;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="ma_khach_hang")
@@ -39,7 +41,13 @@ public class TaiKhoan {
 		this.matKhau = matKhau;
 	}
 
-	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	public KhachHang getKhachHang() {
 		return khachHang;
@@ -54,18 +62,17 @@ public class TaiKhoan {
 	}
 
 	
-	public TaiKhoan(String tenTK, String matKhau, KhachHang khachHang) {
+	public TaiKhoan(String tenTK, String matKhau,String role, KhachHang khachHang) {
 		super();
 		this.tenTK = tenTK;
 		this.matKhau = matKhau;
+		this.role = role;
 		this.khachHang = khachHang;
 	}
 
 	@Override
 	public String toString() {
-		return "TaiKhoan [tenTK=" + tenTK + ", matKhau=" + matKhau + ", maKH=" + khachHang + "]";
+		return "TaiKhoan [tenTK=" + tenTK + ", matKhau=" + matKhau + ", role=" + role + ", khachHang=" + khachHang
+				+ "]";
 	}
-	
-	
-
 }

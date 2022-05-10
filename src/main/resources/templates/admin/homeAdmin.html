@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
 <title>Admin</title>
@@ -38,6 +38,18 @@
 <body>
 
 	<div style="height: 100%; width: 250px; background-color: #fd7e14;">
+		<div class="row" style="margin-left: 10px; padding-top: 20px">
+			User:
+        <span sec:authentication="name" style="margin-left: 5px"></span>
+        <span style="margin-left: 5px">-</span>
+        <div sec:authentication="principal.authorities" style="margin-left: 5px"></div>
+        
+		</div>
+		<div class="row" style="margin-left: 10px; padding-top: 5px">
+		<form th:action="@{/logout}" method="post"> 
+                <input type="submit" value="Logout" class="btn btn-danger"/> 
+            </form>
+		</div>
 		<div class="row" style="margin-left: 70px; padding-top: 30px">
 			<a th:href=@{/shop}><img src="../img/logo.png" alt=""></a>
 		</div>

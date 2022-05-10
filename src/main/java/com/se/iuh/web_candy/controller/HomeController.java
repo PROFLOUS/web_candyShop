@@ -20,13 +20,19 @@ public class HomeController {
 
   @GetMapping("/")
   public String showHomePage() {
-    return "redirect:/api/sanphams";
+    return "redirect:/shop";
   }
 
   @GetMapping("/home")
   public String showShopHome() {
 
     return "index";
+  }
+  
+  @GetMapping("/login")
+  public String showFormLogin() {
+
+    return "login";
   }
 
   @GetMapping("/shop")

@@ -11,5 +11,4 @@ public interface TaiKhoanService {
     public TaiKhoan getTaiKhoanById(String id);
     public TaiKhoan searchTaiKhoanByKhachHangs(KhachHang theKH);
     public void deleteTaiKhoan(String id);
-
 }

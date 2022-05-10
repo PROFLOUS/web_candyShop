@@ -52,14 +52,14 @@
 									<th>Mã HĐ</th>
 									<th>Ngày đặt</th>
 									<th>Ngày giao</th>
-									<th>SĐT người nhận</th>
-									<th>Ghi chú</th>
+									<th>Số lượng</th>
+									<th>SĐT Người nhận</th>
 									<th>Tổng tiền</th>
+									<th>Ghi chú</th>
 									<th>Người nhận</th>
 									<th>Khách hàng</th>
 									<th>Trạng thái</th>
 									<th>Xem chi tiết</th>
-									<th>Sửa</th>
 									<th>Xóa</th>
 									
 								</tr>
@@ -76,13 +76,17 @@
 									<td th:text="${tempHoaDon.tongTien}"></td>
 									<td th:text="${tempHoaDon.ghiChu}"></td>
 									<td th:text="${tempHoaDon.nguoiNhan}"></td>
+									<td th:text="${tempHoaDon.khachHang.tenKH}"></td>
 									<td th:text="${tempHoaDon.trangThai}"></td>
+									
 									<td><a type="button" class="btn btn-primary table__btn"
 									value="Xem chi tiết"
-									th:href="@{/admin/hoadon/khachhang(maHD=${tempHoaDon.maHD})}">Xem chi tiết</a>
-									<td><a
+									th:href="@{/admin/hoadon/updateCTHD(maHD=${tempHoaDon.maHD})}">Xem chi tiết</a>
+									
+									<!-- <td><a
 										th:href="@{/admin/hoadon/update(maHD=${tempHoaDon.maHD})}"
-										aria-hidden="true" class="close" data-dismiss="alert"><i class="fa fa-edit"></i> </a></td>
+										aria-hidden="true" class="close" data-dismiss="alert"><i class="fa fa-edit"></i> </a></td>	 -->
+									
 									<td><a
 										th:href="@{/admin/hoadon/delete(maHD=${tempHoaDon.maHD})}"
 										onclick="if (!(confirm('Bạn có muốn xóa hóa đơn này?'))) return false"

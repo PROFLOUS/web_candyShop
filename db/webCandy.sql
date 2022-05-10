@@ -1,6 +1,6 @@
-create database web_candy
+drop database web_candy
 
-
+use web_candy
 CREATE TABLE [quyen] (
   [ten_tai_khoan] nvarchar(30),
   [role] nvarchar(255)
@@ -107,3 +107,12 @@ VALUES ('Dozen Cupcakes', 100,32.00,'img/shop/product-1.jpg',0.5,'Lorem ipsum do
 
 select * from [san_pham]
 
+INSERT INTO [dbo].[khach_hang]([ten_khach_hang],[sdt],[dia_chi],[email])
+VALUES ('Hong Thuy','0339701675','KienGiang','hohongthuy001@gmail.com')
+select * from [khach_hang]
+
+INSERT INTO [dbo].[hoa_don_ban_hang]([ngay_lap_dat],[ngay_lap_giao],[tong_so_luong],[sdt_nguoi_nhan],[tong_tien],[ghi_chu],[nguoi_nhan],[ma_khach_hang],[trang_thai])
+VALUES ('2022-05-05','2022-05-07',2,'0947666987',350000,'Khong co','Tin',1,'Con hang')
+select * from [hoa_don_ban_hang]
+
+  

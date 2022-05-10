@@ -12,15 +12,10 @@
 <link rel="stylesheet" type="text/css"
 	th:href="@{/fonts/font-awesome-5/css/fontawesome-all.min.css}">
 <!-- Main Style Css -->
-<link rel="stylesheet" href="/css/sua.css" />
+<link rel="stylesheet" th:href="@{/css/sua.css}" />
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
+	type="text/css">
 </head>
-<script type="text/javascript">
-function test(){
-	var abc = document.getElementById("full-name").value;
-	alert("Typed text is: " + abc);
-	return false;
-}
-</script>
 <body class="form-v5">
 	<div class="page-content">
 		<div class="form-v5-content">
@@ -59,5 +54,4 @@ function test(){
 		</div>
 	</div>
 </body>
-<!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
