@@ -31,11 +31,11 @@ public class CTHoaDonRestController {
 		return chitiethoadonDAO.findAll();
 	}
 
-	@GetMapping("/chitiethoadons/{chitiethoadonId}")
-	public ChiTietHDBanHang getCTHoaDon(@PathVariable int chitiethoadonId) {
-		return chitiethoadonDAO.findById(chitiethoadonId)
-				.orElseThrow(() -> new RuntimeException("Employee id not found - " + chitiethoadonId));
-	}
+//	@GetMapping("/chitiethoadons/{chitiethoadonId}")
+//	public ChiTietHDBanHang getCTHoaDon(@PathVariable int chitiethoadonId) {
+//		return chitiethoadonDAO.
+//				.orElseThrow(() -> new RuntimeException("Employee id not found - " + chitiethoadonId));
+//	}
 
 	
 //	@PostMapping("/chitiethoadons")
@@ -55,14 +55,14 @@ public class CTHoaDonRestController {
 	
 	
 	//add mapping for DELETE /employee/{employeeId} - delete empolyess
-		@DeleteMapping("/hoadonbanhangs/{chitiethoadonId}")
-		public void deteleCTHoaDon(@PathVariable int chitiethoadonId) {
-			chitiethoadonDAO.findById(chitiethoadonId)
-					.map(order -> {
-						chitiethoadonDAO.deteleById(chitiethoadonId);//deteleById(order.getMaHD());
-						return order;
-					})
-					.orElseThrow(() -> new RuntimeException("Employee id not found - " + chitiethoadonId));
-		}
+//		@DeleteMapping("/hoadonbanhangs/{chitiethoadonId}")
+//		public void deteleCTHoaDon(@PathVariable int chitiethoadonId) {
+//			chitiethoadonDAO.findById(chitiethoadonId)
+//					.map(order -> {
+//						chitiethoadonDAO.deteleById(chitiethoadonId);//deteleById(order.getMaHD());
+//						return order;
+//					})
+//					.orElseThrow(() -> new RuntimeException("Employee id not found - " + chitiethoadonId));
+//		}
 		
 }

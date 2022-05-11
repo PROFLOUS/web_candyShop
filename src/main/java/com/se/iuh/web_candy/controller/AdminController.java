@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.se.iuh.web_candy.dao.CTHoaDonDAO;
 import com.se.iuh.web_candy.dto.SanPhamDTO;
 import com.se.iuh.web_candy.entity.ChiTietHDBanHang;
 import com.se.iuh.web_candy.entity.HoaDonBanHang;
@@ -55,6 +57,9 @@ public class AdminController {
 	
 	@Autowired
 	private HoaDonService hoaDonService;
+	
+	@Autowired
+	private CTHoaDonDAO chitiethoadonDAO;
 
 	@GetMapping("/sanpham")
 	public String sanPham(Model model) {
@@ -128,7 +133,18 @@ public class AdminController {
 
 	@GetMapping("/sanpham/delete")
 	public String deleteSP(@RequestParam("maSP") int id) {
-		sanPhamService.deleteSanPham(id);
+		List<ChiTietHDBanHang> list= chitiethoadonDAO.findAll();
+		int kq = 0;
+		for (int i = 0; i < list.size(); i++) {
+			if (id == list.get(i).getSanPham().getMaSP()) {
+				kq = 1;
+			}
+		}
+		if (kq == 0) {
+			sanPhamService.deleteSanPham(id);
+		} else {
+			return "admin/SanPham/errorDeleteSP";
+		}
 		return "redirect:/admin/sanpham";
 	}
 
